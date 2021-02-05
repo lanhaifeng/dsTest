@@ -6,6 +6,8 @@ import com.mchz.tool.dstest.domain.auth.DsLdapAuth;
 import com.mchz.tool.dstest.domain.auth.DsUsernameAuth;
 import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
 import com.mchz.tool.dstest.enums.DBType;
+import com.mchz.tool.dstest.exception.NotSupportDbAuthException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +48,11 @@ public class JdbcTestProcessor extends AbstractDsTestProcessor {
 
 	@Override
 	public boolean validateUsernamePasswordAuth(DsUsernamePasswordAuth dsUsernamePasswordAuth) {
+		if(Objects.isNull(dsUsernamePasswordAuth) || Objects.isNull(dsUsernamePasswordAuth.getDbTypeDict())
+				|| StringUtils.isBlank(dsUsernamePasswordAuth.getDbTypeDict().getDriverClass())
+				|| StringUtils.isBlank(dsUsernamePasswordAuth.getDbTypeDict().getJdbcUrlTemplate())){
+			throw new NotSupportDbAuthException(dsUsernamePasswordAuth.getDbTypeDict(), dsUsernamePasswordAuth.getDBAuthMode());
+		}
 		Connection conn = null;
 		Statement st = null;
 		try {

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mchz.tool</groupId>
-    <artifactId>dsTest</artifactId>
+    <artifactId>ds-test</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -23,6 +23,72 @@
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
+        </repository>
+
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>Atlassian-3rd-Party-Repository</id>
+            <name>Atlassian 3rd-Party Repository</name>
+            <url>https://maven.atlassian.com/3rdparty/</url>
+        </repository>
+
+        <repository>
+            <id>oschina-repos</id>
+            <name>Oschina Releases</name>
+            <url>http://maven.oschina.net/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>java-repos</id>
+            <name>Java Repository</name>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+
+        <repository>
+            <id>springsource-repos</id>
+            <name>SpringSource Repository</name>
+            <url>http://repo.spring.io/release/</url>
+        </repository>
+
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+        </repository>
+
+        <repository>
+            <id>central-repos2</id>
+            <name>Central Repository 2</name>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+
+        <repository>
+            <id>activiti-repos</id>
+            <name>Activiti Repository</name>
+            <url>https://maven.alfresco.com/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>activiti-repos2</id>
+            <name>Activiti Repository 2</name>
+            <url>https://app.camunda.com/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>thinkgem-repos</id>
+            <name>ThinkGem Repository</name>
+            <url>http://git.oschina.net/thinkgem/repos/raw/master</url>
+        </repository>
+
+        <repository>
+            <id>thinkgem-repos2</id>
+            <name>ThinkGem Repository 2</name>
+            <url>https://raw.github.com/thinkgem/repository/master</url>
         </repository>
     </repositories>
 
@@ -109,10 +175,82 @@
             <version>5.1.42</version>
         </dependency>
 
+        <!-- dameng driver -->
         <dependency>
             <groupId>com.dameng</groupId>
             <artifactId>Dm7JdbcDriver17</artifactId>
             <version>7.6.0.77</version>
+        </dependency>
+
+        <!-- jtds driver -->
+        <dependency>
+            <groupId>net.sourceforge.jtds</groupId>
+            <artifactId>jtds</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+
+        <!-- oscar driver -->
+        <dependency>
+            <groupId>com.esen.jdbc</groupId>
+            <artifactId>oscarJDBC</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- db2 driver -->
+        <dependency>
+            <groupId>com.ibm.db2.jcc</groupId>
+            <artifactId>db2jcc4</artifactId>
+            <version>10.1</version>
+        </dependency>
+
+        <!-- hive driver -->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <!-- postgresql driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.4.jre7</version>
+        </dependency>
+
+        <!-- mongo driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.13.0</version>
+        </dependency>
+
+        <!-- informix driver -->
+        <dependency>
+            <groupId>com.ibm.informix</groupId>
+            <artifactId>jdbc</artifactId>
+            <version>4.50.3</version>
+        </dependency>
+
+        <!-- kingbase driver -->
+        <dependency>
+            <groupId>com.kingbase8</groupId>
+            <artifactId>jdbc</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- K-DB driver -->
+        <dependency>
+            <groupId>com.inspur</groupId>
+            <artifactId>inspur-jdbc</artifactId>
+            <version>11</version>
+        </dependency>
+
+        <!-- Gbase driver -->
+        <dependency>
+            <groupId>com.gbase</groupId>
+            <artifactId>jdbc</artifactId>
+            <version>8.3.81.53</version>
+            <classifier>bin</classifier>
         </dependency>
 
         <!-- test -->

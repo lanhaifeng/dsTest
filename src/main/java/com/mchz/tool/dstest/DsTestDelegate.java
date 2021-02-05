@@ -2,12 +2,13 @@ package com.mchz.tool.dstest;
 
 import com.mchz.tool.dstest.constants.DsTestConstant;
 import com.mchz.tool.dstest.domain.DsConnection;
-import com.mchz.tool.dstest.enums.DBAuthMode;
 import com.mchz.tool.dstest.enums.DBType;
 import com.mchz.tool.dstest.processor.DsTestProcessor;
 import com.mchz.tool.dstest.processor.JdbcTestProcessor;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * soc
@@ -20,6 +21,7 @@ import java.util.*;
 public class DsTestDelegate {
 
 	private Map<Class, DsTestProcessor> processors = new HashMap<>();
+	private Map<DBType, DsTestProcessor> extendProcessors = new HashMap<>();
 
 	public DsTestDelegate() {
 		init();
@@ -29,14 +31,13 @@ public class DsTestDelegate {
 	 * 2021/2/4 20:10
 	 * 测试服务
 	 *
-	 * @param dbType
 	 * @param ip
 	 * @param port
 	 * @author lanhaifeng
 	 * @return boolean
 	 */
-	public boolean testService(DBType dbType, String ip, Integer port) {
-		return Objects.nonNull(getDsTestProcessor(dbType)) && getDsTestProcessor(dbType).testService(ip, port);
+	public boolean testService(String ip, Integer port) {
+		return Objects.nonNull(processors.get(JdbcTestProcessor.class)) && processors.get(JdbcTestProcessor.class).testService(ip, port);
 	}
 
 	/**
@@ -55,6 +56,21 @@ public class DsTestDelegate {
 	}
 
 	/**
+	 * 2021/2/5 9:47
+	 * 添加处理器
+	 *
+	 * @param dbType
+	 * @param dsTestProcessor
+	 * @author lanhaifeng
+	 * @return void
+	 */
+	public void addProcessor(DBType dbType, DsTestProcessor dsTestProcessor){
+		if(Objects.nonNull(dbType) && Objects.nonNull(dsTestProcessor)){
+			extendProcessors.put(dbType, dsTestProcessor);
+		}
+	}
+
+	/**
 	 * 2021/2/4 20:12
 	 * 获取处理器
 	 *
@@ -63,13 +79,15 @@ public class DsTestDelegate {
 	 * @return com.mchz.tool.dstest.processor.DsTestProcessor
 	 */
 	private DsTestProcessor getDsTestProcessor(DBType dbType){
+		DsTestProcessor processor = null;
 		if(Objects.nonNull(dbType)){
-			if(DsTestConstant.jdbcDbTypes.contains(dbType)){
-				return processors.get(JdbcTestProcessor.class);
+			processor = extendProcessors.get(dbType);
+			if(Objects.isNull(processor) && DsTestConstant.jdbcDbTypes.contains(dbType)){
+				processor = processors.get(JdbcTestProcessor.class);
 			}
 		}
 
-		return null;
+		return processor;
 	}
 
 	/**

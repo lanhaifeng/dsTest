@@ -4,6 +4,8 @@ package com.mchz.tool.dstest.exception;
 import com.mchz.tool.dstest.enums.DBAuthMode;
 import com.mchz.tool.dstest.enums.DBType;
 
+import java.util.Objects;
+
 /**
  * dsTest
  * 2021/2/4 19:16
@@ -17,7 +19,8 @@ public class NotSupportDbAuthException extends RuntimeException {
     private static String messageTemplate = "%s不支持%s认证";
 
     public NotSupportDbAuthException(DBType dbType, DBAuthMode dbAuthMode){
-        super(String.format(messageTemplate, dbType.getDbTypeValue(), dbAuthMode.getLabel()));
+        super(String.format(messageTemplate, Objects.isNull(dbType) ? "NULL_DBTYPE" : dbType.getDbTypeValue(),
+                Objects.isNull(dbAuthMode) ? "NULL_ATUH" : dbAuthMode.getLabel()));
     }
 
     public NotSupportDbAuthException(Throwable cause, DBType dbType, DBAuthMode dbAuthMode) {

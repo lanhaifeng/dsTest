@@ -33,8 +33,8 @@ public enum DBType {
 	SYBASE("sybase", "Sybase", "net.sourceforge.jtds.jdbc.Driver", "jdbc:sybase:Tds:[ip]:[port]/[instanceName]"),
 	DAMENG("dameng", "DaMeng", "", "jdbc:dm://[ip]:[port]/[instanceName]"),
 
-	K_DB("kdb", "K-DB", "", ""),
-	GBASE("gbase", "GBase", "", ""),
+	K_DB("kdb", "K-DB", "com.inspur.jdbc.KdDriver", ""),
+	GBASE("gbase", "GBase", "com.gbase.jdbc.Driver", "jdbc:gbase://[ip]:[port]/[instanceName]"),
 	REDIS("redis", "Redis", "", ""),
 
 	HBASE("hbase", "Hbase", "", ""),
@@ -42,9 +42,9 @@ public enum DBType {
 	ELASTICSEARCH("elasticsearch", "ElasticSearch", "", ""),
 	MONGODB("mongodb", "MongoDB", "", ""),
 
-	RDS_MYSQL("rds_mysql", "阿里云RDS-MySQL", "", ""),
-	RDS_POSTGRESQL("rds_postgresql", "阿里云RDS-PostgreSQL", "", ""),
-	RDS_SQLSERVER("rds_sqlserver", "阿里云RDS-SQL Server", "", ""),
+	RDS_MYSQL("rds_mysql", "阿里云RDS-MySQL", "com.mysql.jdbc.Driver", "jdbc:mysql://[ip]:[port]/[instanceName]"),
+	RDS_POSTGRESQL("rds_postgresql", "阿里云RDS-PostgreSQL", "org.postgresql.Driver", "jdbc:postgresql://[ip]:[port]/[instanceName]"),
+	RDS_SQLSERVER("rds_sqlserver", "阿里云RDS-SQL Server", "net.sourceforge.jtds.jdbcx.JtdsDataSource", "jdbc:jtds:sqlserver://[ip]:[port];DatabaseName=[instanceName]"),
 
 	;
 
