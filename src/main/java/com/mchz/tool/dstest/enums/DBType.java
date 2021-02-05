@@ -33,7 +33,7 @@ public enum DBType {
 	SYBASE("sybase", "Sybase", "net.sourceforge.jtds.jdbc.Driver", "jdbc:sybase:Tds:[ip]:[port]/[instanceName]"),
 	DAMENG("dameng", "DaMeng", "", "jdbc:dm://[ip]:[port]/[instanceName]"),
 
-	K_DB("kdb", "K-DB", "com.inspur.jdbc.KdDriver", ""),
+	K_DB("kdb", "K-DB", "com.inspur.jdbc.KdDriver", "jdbc:inspur:thin:@[ip]:[port]:[instanceName]"),
 	GBASE("gbase", "GBase", "com.gbase.jdbc.Driver", "jdbc:gbase://[ip]:[port]/[instanceName]"),
 	REDIS("redis", "Redis", "", ""),
 
