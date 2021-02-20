@@ -38,7 +38,6 @@ public enum DBType {
 	REDIS("redis", "Redis", "", ""),
 
 	HBASE("hbase", "Hbase", "", ""),
-	INSIGHT_HD("insighthd", "浪潮云海Insight HD", "", ""),
 	ELASTICSEARCH("elasticsearch", "ElasticSearch", "", ""),
 	MONGODB("mongodb", "MongoDB", "", ""),
 
