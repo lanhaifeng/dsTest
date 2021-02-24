@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author lanhaifeng
  * @since
  **/
-public class DsKerberosAuth extends DsConnection {
+public class DsKerberosAuth extends DsUsernamePasswordAuth {
 
 	/**
 	 * kerberos的配置文件krb5.conf

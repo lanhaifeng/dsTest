@@ -3,8 +3,7 @@ package com.mchz.tool.dstest;
 import com.mchz.tool.dstest.constants.DsTestConstant;
 import com.mchz.tool.dstest.domain.DsConnection;
 import com.mchz.tool.dstest.enums.DBType;
-import com.mchz.tool.dstest.processor.DsTestProcessor;
-import com.mchz.tool.dstest.processor.JdbcTestProcessor;
+import com.mchz.tool.dstest.processor.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,6 +84,9 @@ public class DsTestDelegate {
 			if(Objects.isNull(processor) && DsTestConstant.jdbcDbTypes.contains(dbType)){
 				processor = processors.get(JdbcTestProcessor.class);
 			}
+			if(Objects.isNull(processor) && DsTestConstant.databaseCliDbTypes.contains(dbType)){
+				processor = processors.get(DatabaseCliProcessor.class);
+			}
 		}
 
 		return processor;
@@ -100,5 +102,10 @@ public class DsTestDelegate {
 	 */
 	private void init(){
 		processors.put(JdbcTestProcessor.class, new JdbcTestProcessor());
+		processors.put(DatabaseCliProcessor.class, new DatabaseCliProcessor());
+		extendProcessors.put(DBType.REDIS, new RedisTestProcessor());
+		extendProcessors.put(DBType.ELASTICSEARCH, new ElasticSearchTestProcessor());
+		extendProcessors.put(DBType.HIVE, new HiveProcessor());
+		extendProcessors.put(DBType.MONGODB, new MongoDBTestProcessor());
 	}
 }

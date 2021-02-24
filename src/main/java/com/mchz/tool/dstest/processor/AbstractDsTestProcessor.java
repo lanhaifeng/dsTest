@@ -1,5 +1,6 @@
 package com.mchz.tool.dstest.processor;
 
+import com.mchz.mcdatasource.core.DataBaseType;
 import com.mchz.tool.dstest.domain.DsConnection;
 import com.mchz.tool.dstest.domain.auth.DsKerberosAuth;
 import com.mchz.tool.dstest.domain.auth.DsLdapAuth;
@@ -10,6 +11,8 @@ import com.mchz.tool.dstest.enums.DBAuthMode;
 import com.mchz.tool.dstest.exception.NotSupportDbAuthException;
 import com.mchz.tool.dstest.util.IpUtils;
 import com.mchz.tool.dstest.util.ValidateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +27,8 @@ import java.util.Objects;
  **/
 public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 
+	protected static Logger logger = LoggerFactory.getLogger(AbstractDsTestProcessor.class);
+
 	@Override
 	public boolean testService(String ip, Integer port) {
 		return IpUtils.checkIpPort(ip, port);
@@ -31,12 +36,13 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 
 	@Override
 	public boolean testConnection(DBAuthMode dsAuthMode, DsConnection dsConnection) {
-		if(Objects.isNull(dsAuthMode) || Objects.isNull(dsConnection) || !ValidateUtils.validateResult(dsConnection)){
+		if(Objects.isNull(dsAuthMode) || Objects.isNull(dsConnection) || !ValidateUtils.validateResult(dsConnection)
+				|| !support(dsConnection.getDbTypeDict())){
 			return false;
 		}
 		switch (dsAuthMode){
 			case NO_AUTH:
-				return true;
+				return validateNoAuth(dsConnection);
 			case USERNAME_AUTH:
 				return dsConnection instanceof DsUsernameAuth && validateUsernameAuth((DsUsernameAuth)dsConnection);
 			case USERNAME_PASSWORD_AUTH:
@@ -44,7 +50,7 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 			case LDAP_AUTH:
 				return dsConnection instanceof DsLdapAuth && validateLdapAuth((DsLdapAuth)dsConnection);
 			case KERBEROS_AUTH:
-				return dsConnection instanceof DsKerberosAuth && validateKerberosAuht((DsKerberosAuth)dsConnection);
+				return dsConnection instanceof DsKerberosAuth && validateKerberosAuth((DsKerberosAuth)dsConnection);
 		}
 		return false;
 	}
@@ -72,7 +78,7 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 	 * @author lanhaifeng
 	 * @return boolean
 	 */
-	public boolean validateUsernameAuth(DsUsernameAuth dsUsernameAuth){
+	protected boolean validateUsernameAuth(DsUsernameAuth dsUsernameAuth){
 		throw new NotSupportDbAuthException(dsUsernameAuth.getDbTypeDict(), DBAuthMode.USERNAME_AUTH);
 	}
 
@@ -84,7 +90,7 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 	 * @author lanhaifeng
 	 * @return boolean
 	 */
-	public boolean validateUsernamePasswordAuth(DsUsernamePasswordAuth dsUsernamePasswordAuth){
+	protected boolean validateUsernamePasswordAuth(DsUsernamePasswordAuth dsUsernamePasswordAuth){
 		throw new NotSupportDbAuthException(dsUsernamePasswordAuth.getDbTypeDict(), DBAuthMode.USERNAME_PASSWORD_AUTH);
 	}
 
@@ -96,7 +102,7 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 	 * @author lanhaifeng
 	 * @return boolean
 	 */
-	public boolean validateLdapAuth(DsLdapAuth ldapAuth){
+	protected boolean validateLdapAuth(DsLdapAuth ldapAuth){
 		throw new NotSupportDbAuthException(ldapAuth.getDbTypeDict(), DBAuthMode.LDAP_AUTH);
 	}
 
@@ -108,7 +114,47 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 	 * @author lanhaifeng
 	 * @return boolean
 	 */
-	public boolean validateKerberosAuht(DsKerberosAuth dsKerberosAuth){
+	protected boolean validateKerberosAuth(DsKerberosAuth dsKerberosAuth){
 		throw new NotSupportDbAuthException(dsKerberosAuth.getDbTypeDict(), DBAuthMode.KERBEROS_AUTH);
+	}
+
+	/**
+	 * 2021/2/22 9:43
+	 * 无认证测试连接
+	 *
+	 * @param dsConnection
+	 * @author lanhaifeng
+	 * @return boolean
+	 */
+	protected boolean validateNoAuth(DsConnection dsConnection){
+		throw new NotSupportDbAuthException(dsConnection.getDbTypeDict(), DBAuthMode.NO_AUTH);
+	}
+
+	protected DataBaseType toDataBaseType(DsConnection dsConnection){
+		DBType dbType = dsConnection.getDbTypeDict();
+		DBAuthMode dbAuthMode = dsConnection.getDBAuthMode();
+		if(Objects.isNull(dbType)){
+			return null;
+		}
+		for(DataBaseType dataBaseType : DataBaseType.values()){
+			if(dataBaseType.id.equalsIgnoreCase(dbType.getDbTypeValue())){
+				return dataBaseType;
+			}
+		}
+		switch (dbType){
+			case SQLSERVER:
+				return DataBaseType.MSSQL;
+			case POSTGRESQL:
+				return DataBaseType.PGSQL;
+			case DAMENG:
+				return DataBaseType.DM;
+			case HIVE:
+				if(dbAuthMode == DBAuthMode.KERBEROS_AUTH){
+					return DataBaseType.HIVE_FHD653;
+				}
+				return DataBaseType.HIVE;
+		}
+
+		return null;
 	}
 }
