@@ -1,6 +1,5 @@
 package com.mchz.tool.dstest.domain.auth;
 
-import com.mchz.tool.dstest.domain.DsConnection;
 import com.mchz.tool.dstest.enums.DBAuthMode;
 import org.hibernate.validator.constraints.NotEmpty;
 

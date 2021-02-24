@@ -180,7 +180,9 @@ public class DsTestDelegateTest {
 		auth.setUserName("db2inst1");
 		auth.setPassword("db2inst1");
 
-		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+//		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+//		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService("192.168.239.111", 50000));
+		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService("192.168.239.111", 50001));
 		Assert.assertTrue("测试db2连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
 
@@ -190,13 +192,13 @@ public class DsTestDelegateTest {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
-		auth.setAddress("192.168.238.219");
+		auth.setAddress("192.168.202.60");
 		auth.setPort(54321);
 		auth.setDbType(DBType.KINGBASE.getDbTypeValue());
 
-		auth.setInstanceName("kingbasees_instance1");
-		auth.setUserName("system");
-		auth.setPassword("krms");
+		auth.setInstanceName("TEST");
+		auth.setUserName("SYSTEM");
+		auth.setPassword("system");
 
 		Assert.assertTrue("测试Kingbase服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Kingbase连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
