@@ -47,6 +47,7 @@ public class DatabaseCliProcessorTest {
 		Assert.assertTrue("测试oracle连接失败", databaseCliProcessor.validateUsernamePasswordAuth(dsUsernamePasswordAuth));
 	}
 
+	@Test
 	public void testGbase1() throws Exception {
 		System.setProperty(DatasourceConstant.MCDATASOURCE_HOME, "F:\\mcdatasource");
 

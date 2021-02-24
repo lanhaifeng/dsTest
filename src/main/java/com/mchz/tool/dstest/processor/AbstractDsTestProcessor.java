@@ -153,6 +153,10 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 					return DataBaseType.HIVE_FHD653;
 				}
 				return DataBaseType.HIVE;
+			case GBASE:
+				return DataBaseType.GBASE8A;
+			case K_DB:
+				return DataBaseType.KDB;
 		}
 
 		return null;

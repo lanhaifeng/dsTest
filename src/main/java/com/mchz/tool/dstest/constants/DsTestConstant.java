@@ -18,16 +18,16 @@ public class DsTestConstant {
 	/**
 	 * 使用JdbcTestProcessor的数据库集合
 	 */
-	public static List<DBType> jdbcDbTypes = Arrays.asList(DBType.MARIADB, DBType.SQLSERVER,
-			DBType.POSTGRESQL, DBType.GREENPLUM, DBType.HIGHGODB, DBType.DB2, DBType.OSCAR, DBType.INFORMIX,
-			DBType.HIVE, DBType.KINGBASE, DBType.SYBASE, DBType.DAMENG, DBType.RDS_MYSQL, DBType.RDS_POSTGRESQL, DBType.RDS_SQLSERVER,
-			DBType.GBASE, DBType.K_DB);
+	public static List<DBType> jdbcDbTypes = Arrays.asList(
+			DBType.MARIADB, DBType.SQLSERVER, DBType.GREENPLUM, DBType.GBASE,
+			DBType.KINGBASE, DBType.DB2,
+			DBType.HIGHGODB, DBType.OSCAR, DBType.INFORMIX,
+			DBType.RDS_MYSQL, DBType.RDS_POSTGRESQL, DBType.RDS_SQLSERVER
+			);
 
 	/**
 	 * 使用DatabaseCliProcessor的数据库集合
 	 */
-	public static List<DBType> databaseCliDbTypes = Arrays.asList(DBType.ORACLE, DBType.MYSQL, DBType.MARIADB, DBType.SQLSERVER,
-			DBType.POSTGRESQL, DBType.GREENPLUM, DBType.HIGHGODB, DBType.DB2, DBType.OSCAR, DBType.INFORMIX,
-			DBType.HIVE, DBType.KINGBASE, DBType.SYBASE, DBType.DAMENG, DBType.RDS_MYSQL, DBType.RDS_POSTGRESQL, DBType.RDS_SQLSERVER,
-			DBType.GBASE, DBType.K_DB);
+	public static List<DBType> databaseCliDbTypes = Arrays.asList(DBType.SYBASE, DBType.DAMENG, DBType.ORACLE,
+			DBType.MYSQL, DBType.POSTGRESQL, DBType.K_DB);
 }

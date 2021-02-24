@@ -30,8 +30,8 @@ public enum DBType {
 	HIVE("hive", "Hive", "org.apache.hive.jdbc.HiveDriver", ""),
 	KINGBASE("kingbase", "KingBase", "com.kingbase8.Driver", "jdbc:kingbase8://[ip]:[port]/[instanceName]"),
 
-	SYBASE("sybase", "Sybase", "net.sourceforge.jtds.jdbc.Driver", "jdbc:sybase:Tds:[ip]:[port]/[instanceName]"),
-	DAMENG("dameng", "DaMeng", "", "jdbc:dm://[ip]:[port]/[instanceName]"),
+	SYBASE("sybase", "Sybase", "net.sourceforge.jtds.jdbc.Driver", "jdbc:jtds:sybase://[ip]:[port]/[instanceName]"),
+	DAMENG("dameng", "DaMeng", "dm.jdbc.driver.DmDriver", "jdbc:dm://[ip]:[port]/[instanceName]"),
 
 	K_DB("kdb", "K-DB", "com.inspur.jdbc.KdDriver", "jdbc:inspur:thin:@[ip]:[port]:[instanceName]"),
 	GBASE("gbase", "GBase", "com.gbase.jdbc.Driver", "jdbc:gbase://[ip]:[port]/[instanceName]"),

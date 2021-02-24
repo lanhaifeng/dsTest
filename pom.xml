@@ -185,33 +185,12 @@
             <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- oracle driver -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.4.0-atlassian-hosted</version>
-        </dependency>
-
-        <!-- sqlserver driver -->
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>sqljdbc4</artifactId>
-            <version>4.0</version>
-        </dependency>
-
-        <!-- mysql driver -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.42</version>
-        </dependency>
-
-        <!-- dameng driver -->
-        <dependency>
-            <groupId>com.dameng</groupId>
-            <artifactId>Dm7JdbcDriver17</artifactId>
-            <version>7.6.0.77</version>
-        </dependency>
+		<!-- mysql driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.42</version>
+		</dependency>
 
         <!-- jtds driver -->
         <dependency>
@@ -241,13 +220,6 @@
             <version>1.2.2</version>
         </dependency>
 
-        <!-- postgresql driver -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.4.jre7</version>
-        </dependency>
-
         <!-- mongo driver -->
         <dependency>
             <groupId>org.mongodb</groupId>
@@ -267,21 +239,6 @@
             <groupId>com.kingbase8</groupId>
             <artifactId>jdbc</artifactId>
             <version>1.0</version>
-        </dependency>
-
-        <!-- K-DB driver -->
-        <dependency>
-            <groupId>com.inspur</groupId>
-            <artifactId>inspur-jdbc</artifactId>
-            <version>11</version>
-        </dependency>
-
-        <!-- Gbase driver -->
-        <dependency>
-            <groupId>com.gbase</groupId>
-            <artifactId>jdbc</artifactId>
-            <version>8.3.81.53</version>
-            <classifier>bin</classifier>
         </dependency>
 
         <!-- redis -->
@@ -324,6 +281,13 @@
             <version>5.5.7</version>
         </dependency>
 
+        <!-- postgresql driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.4.jre7</version>
+        </dependency>
+
         <!-- logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -334,13 +298,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
             <version>1.1.7</version>
-        </dependency>
-
-        <!-- mongo -->
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>2.13.2</version>
         </dependency>
 
         <!-- test -->

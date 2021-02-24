@@ -47,8 +47,8 @@ public class DsTestDelegateTest {
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
 		auth.setAddress("192.168.239.141");
 		auth.setPort(8629);
-		auth.setInstanceName("soc");
-		auth.setDbType(DBType.GBASE.getDbTypeValue());
+		auth.setInstanceName("KDB");
+		auth.setDbType(DBType.K_DB.getDbTypeValue());
 
 		auth.setUserName("sys");
 		auth.setPassword("kdb");
@@ -57,6 +57,9 @@ public class DsTestDelegateTest {
 		Assert.assertTrue("测试kdb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
 
+	/**
+	 * DatabaseCliProcessor需要区分版本号
+	 */
 	@Test
 	@Ignore
 	public void testGbaseConnection() {
@@ -91,5 +94,146 @@ public class DsTestDelegateTest {
 
 		Assert.assertTrue("测试oracle服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试oracle连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testMariadbConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.128");
+		auth.setPort(3306);
+		auth.setDbType(DBType.MARIADB.getDbTypeValue());
+
+		auth.setUserName("root");
+		auth.setPassword("hzmcdba");
+
+		Assert.assertTrue("测试Mariadb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Mariadb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testSqlServerConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.225.30");
+		auth.setPort(1434);
+		auth.setDbType(DBType.SQLSERVER.getDbTypeValue());
+
+		auth.setUserName("sa");
+		auth.setPassword("Hzmc321#");
+
+		Assert.assertTrue("测试sql server服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试sql server连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testPGConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.239.66");
+		auth.setPort(5432);
+		auth.setDbType(DBType.POSTGRESQL.getDbTypeValue());
+
+		auth.setInstanceName("postgres");
+		auth.setUserName("postgres");
+		auth.setPassword("postgres");
+
+		Assert.assertTrue("测试PostgreSQL服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试PostgreSQL连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testGreenplumConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.240.92");
+		auth.setPort(5432);
+		auth.setDbType(DBType.GREENPLUM.getDbTypeValue());
+
+		auth.setInstanceName("gp_db");
+		auth.setUserName("gpadmin");
+		auth.setPassword("gpadmin");
+
+		Assert.assertTrue("测试Greenplum服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Greenplum连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testDb2Connection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.210.80");
+		auth.setPort(50003);
+		auth.setDbType(DBType.DB2.getDbTypeValue());
+
+		auth.setInstanceName("TEST");
+		auth.setUserName("db2inst1");
+		auth.setPassword("db2inst1");
+
+		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试db2连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testKingbaseConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.238.219");
+		auth.setPort(54321);
+		auth.setDbType(DBType.KINGBASE.getDbTypeValue());
+
+		auth.setInstanceName("kingbasees_instance1");
+		auth.setUserName("system");
+		auth.setPassword("krms");
+
+		Assert.assertTrue("测试Kingbase服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Kingbase连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testSysbaseConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.53");
+		auth.setPort(7000);
+		auth.setDbType(DBType.SYBASE.getDbTypeValue());
+
+		auth.setInstanceName("HZMC_SYB12");
+		auth.setUserName("sa");
+		auth.setPassword("hzmcdba");
+
+		Assert.assertTrue("测试Sybase服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Sybase连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testDamengConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.242.115");
+		auth.setPort(5236);
+		auth.setDbType(DBType.DAMENG.getDbTypeValue());
+
+		auth.setUserName("SYSDBA");
+		auth.setPassword("dameng123");
+
+		Assert.assertTrue("测试Dameng服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Dameng连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
 }
