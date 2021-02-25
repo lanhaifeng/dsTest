@@ -206,13 +206,6 @@
             <version>1.0</version>
         </dependency>
 
-        <!-- db2 driver -->
-        <dependency>
-            <groupId>com.ibm.db2.jcc</groupId>
-            <artifactId>db2jcc4</artifactId>
-            <version>10.1</version>
-        </dependency>
-
         <!-- mongo driver -->
         <dependency>
             <groupId>org.mongodb</groupId>

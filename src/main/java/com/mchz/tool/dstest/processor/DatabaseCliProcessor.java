@@ -37,7 +37,7 @@ public class DatabaseCliProcessor extends AbstractDsTestProcessor {
 			DatasourceDatabaseCli datasourceDatabase =
 					new DatasourceDatabaseCli(dataBaseType.pluginId,
 							dsUsernamePasswordAuth.getAddress(), dbName, String.valueOf(dsUsernamePasswordAuth.getPort()),
-							dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword());
+							dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword(), true);
 			datasourceDatabase.connect(true);
 			return true;
 		} catch (Exception e) {

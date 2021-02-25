@@ -115,6 +115,23 @@ public class DsTestDelegateTest {
 
 	@Test
 	@Ignore
+	public void testHighgodbConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.240.157");
+		auth.setPort(5866);
+		auth.setDbType(DBType.HIGHGODB.getDbTypeValue());
+
+		auth.setUserName("highgo");
+		auth.setPassword("highgo123");
+
+		Assert.assertTrue("测试Highgodb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Highgodb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
 	public void testSqlServerConnection() {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 
@@ -154,11 +171,11 @@ public class DsTestDelegateTest {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
-		auth.setAddress("192.168.240.92");
+		auth.setAddress("192.168.239.111");
 		auth.setPort(5432);
 		auth.setDbType(DBType.GREENPLUM.getDbTypeValue());
 
-		auth.setInstanceName("gp_db");
+		auth.setInstanceName("gpadminDB");
 		auth.setUserName("gpadmin");
 		auth.setPassword("gpadmin");
 
@@ -173,16 +190,14 @@ public class DsTestDelegateTest {
 
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
 		auth.setAddress("192.168.210.80");
-		auth.setPort(50003);
+		auth.setPort(50001);
 		auth.setDbType(DBType.DB2.getDbTypeValue());
 
 		auth.setInstanceName("TEST");
-		auth.setUserName("db2inst1");
-		auth.setPassword("db2inst1");
+		auth.setUserName("db2inst3");
+		auth.setPassword("db2inst3");
 
-//		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
-//		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService("192.168.239.111", 50000));
-		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService("192.168.239.111", 50001));
+		Assert.assertTrue("测试db2服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试db2连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
 
@@ -237,5 +252,41 @@ public class DsTestDelegateTest {
 
 		Assert.assertTrue("测试Dameng服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Dameng连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testOscarConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.238.213");
+		auth.setPort(2003);
+		auth.setDbType(DBType.OSCAR.getDbTypeValue());
+
+		auth.setInstanceName("OSRDB");
+		auth.setUserName("SYSDBA");
+		auth.setPassword("szoscar55");
+
+		Assert.assertTrue("测试Oscar服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Oscar连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testInformixConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.45");
+		auth.setPort(1528);
+		auth.setDbType(DBType.INFORMIX.getDbTypeValue());
+
+		auth.setInstanceName("test2");
+		auth.setUserName("informix");
+		auth.setPassword("informix");
+
+		Assert.assertTrue("测试Informix服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Informix连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
 }

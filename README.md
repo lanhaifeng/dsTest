@@ -173,4 +173,29 @@ setProperty(DatasourceConstant.MCDATASOURCE_HOME,  "/data/mcdatasource");
             <artifactId>jdbc4</artifactId>
             <version>16.0</version>
         </dependency>
+        
+        <!-- hbase driver -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-auth</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-protocol</artifactId>
+            <version>1.3.1</version>
+        </dependency>
 ```
