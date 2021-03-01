@@ -124,7 +124,7 @@ public class DsTestDelegateTest {
 		auth.setDbType(DBType.HIGHGODB.getDbTypeValue());
 
 		auth.setUserName("highgo");
-		auth.setPassword("highgo123");
+		auth.setPassword("highgo");
 
 		Assert.assertTrue("测试Highgodb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Highgodb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
@@ -288,5 +288,22 @@ public class DsTestDelegateTest {
 
 		Assert.assertTrue("测试Informix服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Informix连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testMongodbConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setDbType(DBType.MONGODB.getDbTypeValue());
+		auth.setAddress("192.168.202.2");
+		auth.setPort(27017);
+		auth.setUserName("test");
+		auth.setPassword("test");
+		auth.setInstanceName("test");
+
+		Assert.assertTrue("测试Mongodb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Mongodb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
 }
