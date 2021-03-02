@@ -1,9 +1,12 @@
 package com.mchz.tool.dstest;
 
+import cn.hutool.core.lang.Assert;
+import com.mchz.mcdatasource.core.DatasourceConstant;
 import com.mchz.tool.dstest.constants.DsTestConstant;
 import com.mchz.tool.dstest.domain.DsConnection;
 import com.mchz.tool.dstest.enums.DBType;
 import com.mchz.tool.dstest.processor.*;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +24,10 @@ public class DsTestDelegate {
 
 	private Map<Class, DsTestProcessor> processors = new HashMap<>();
 	private Map<DBType, DsTestProcessor> extendProcessors = new HashMap<>();
+
+	public static void setMcDatasourceEnvironment(String mcDatasourceHome){
+		System.setProperty(DatasourceConstant.MCDATASOURCE_HOME, mcDatasourceHome);
+	}
 
 	public DsTestDelegate() {
 		init();
@@ -101,6 +108,7 @@ public class DsTestDelegate {
 	 * @return void
 	 */
 	private void init(){
+		Assert.state(StringUtils.isNotBlank(System.getProperty(DatasourceConstant.MCDATASOURCE_HOME)), "MCDATASOURCE_HOME未设置");
 		processors.put(JdbcTestProcessor.class, new JdbcTestProcessor());
 		processors.put(DatabaseCliProcessor.class, new DatabaseCliProcessor());
 		extendProcessors.put(DBType.REDIS, new RedisTestProcessor());
