@@ -7,6 +7,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mariadb.jdbc.Driver;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Properties;
 
 public class DsTestDelegateTest {
 
@@ -98,7 +103,7 @@ public class DsTestDelegateTest {
 
 	@Test
 	@Ignore
-	public void testMariadbConnection() {
+	public void testMariadbConnection() throws SQLException {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
@@ -111,6 +116,13 @@ public class DsTestDelegateTest {
 
 		Assert.assertTrue("测试Mariadb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Mariadb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+
+		Properties properties = new Properties();
+		properties.put("user", "root");
+		properties.put("password", "hzmcdba");
+		Driver driver = new Driver();
+		Connection connection = driver.connect("jdbc:mariadb://192.168.202.128:3306/", properties);
+		System.out.println(connection);
 	}
 
 	@Test
@@ -282,6 +294,7 @@ public class DsTestDelegateTest {
 		auth.setPort(1528);
 		auth.setDbType(DBType.INFORMIX.getDbTypeValue());
 
+//		auth.setServiceName("demoserver");
 		auth.setInstanceName("test2");
 		auth.setUserName("informix");
 		auth.setPassword("informix");

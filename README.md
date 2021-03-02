@@ -2,12 +2,15 @@
 
 ```
 <dependency>
-	<groupId>com.mchz</groupId>
-	<artifactId>datasource-cli</artifactId>
-	<version>1.3.0-SNAPSHOT</version>
+    <groupId>com.mchz</groupId>
+    <artifactId>datasource-cli</artifactId>
+    <version>1.3.0-SNAPSHOT</version>
 </dependency>
 ```
-
+注：springboot使用该jar包时，使用注解排除JooqAutoConfiguration自动配置，否则会导致启动卡死
+```
+@SpringBootApplication(exclude = {MongoAutoConfiguration. class, JooqAutoConfiguration.class} )
+```
 
 
 2.使用
@@ -176,26 +179,8 @@ setProperty(DatasourceConstant.MCDATASOURCE_HOME,  "/data/mcdatasource");
         
         <!-- hbase driver -->
         <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>2.6.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-auth</artifactId>
-            <version>2.6.0</version>
-        </dependency>
-
-
-        <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
-            <version>1.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-protocol</artifactId>
             <version>1.3.1</version>
         </dependency>
 ```

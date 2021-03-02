@@ -13,7 +13,8 @@ public enum DBType {
 
 	ORACLE("oracle", "Oracle", "oracle.jdbc.xa.client.OracleXADataSource", "jdbc:oracle:thin:@[ip]:[port]/[instanceName]"),
 	MYSQL("mysql", "MySQL", "com.mysql.jdbc.Driver", "jdbc:mysql://[ip]:[port]/[instanceName]"),
-	MARIADB("mariadb", "Mariadb", "com.mysql.jdbc.Driver", "jdbc:mysql://[ip]:[port]/[instanceName]"),
+//	MARIADB("mariadb", "Mariadb", "com.mysql.jdbc.Driver", "jdbc:mysql://[ip]:[port]/[instanceName]"),
+	MARIADB("mariadb", "Mariadb", "org.mariadb.jdbc.Driver", "jdbc:mariadb://[ip]:[port]/[instanceName]"),
 
 	SQLSERVER("sqlserver", "SQL Server", "net.sourceforge.jtds.jdbcx.JtdsDataSource", "jdbc:jtds:sqlserver://[ip]:[port];DatabaseName=[instanceName]"),
 	POSTGRESQL("postgresql", "PostgreSQL", "org.postgresql.Driver", "jdbc:postgresql://[ip]:[port]/[instanceName]"),

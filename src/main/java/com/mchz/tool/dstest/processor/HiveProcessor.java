@@ -8,6 +8,7 @@ import com.mchz.mcdatasource.core.DatasourceConstant;
 import com.mchz.tool.dstest.domain.auth.DsKerberosAuth;
 import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
 import com.mchz.tool.dstest.enums.DBType;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 
 import java.util.Arrays;
@@ -34,17 +35,21 @@ public class HiveProcessor extends AbstractDsTestProcessor {
 	protected boolean validateUsernamePasswordAuth(DsUsernamePasswordAuth dsUsernamePasswordAuth) {
 		try {
 			Properties properties = new Properties();
-			DataBaseType dataBaseType = DataBaseType.HIVE;
+			DataBaseType dataBaseType = toDataBaseType(dsUsernamePasswordAuth);
 			if (dsUsernamePasswordAuth instanceof DsKerberosAuth) {
 				DsKerberosAuth dsKerberosAuth = (DsKerberosAuth) dsUsernamePasswordAuth;
-				properties.setProperty(DatasourceConstant.KEY_DB_HIVE_PRINCIPAL, dsKerberosAuth.getPrincipal());
+				if(StringUtils.isNotBlank(dsKerberosAuth.getPrincipal())){
+					properties.setProperty(DatasourceConstant.KEY_DB_HIVE_PRINCIPAL, dsKerberosAuth.getPrincipal());
+				}
 
 				String keytab = Base64.encode(new FileReader(dsKerberosAuth.getClientKeyTabFile()).readBytes());
 				String krb5 = Base64.encode(new FileReader(dsKerberosAuth.getConfigFile()).readBytes());
 				properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_KEYTAB_CONTENT, keytab);
 				properties.setProperty(DatasourceConstant.KEY_DB_KRB5_CONTENT, krb5);
 				properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, dsUsernamePasswordAuth.getUserName());
-				dataBaseType = DataBaseType.HIVE_FHD653;
+				if(dataBaseType == DataBaseType.HIVE){
+					dataBaseType = DataBaseType.HIVE_FHD653;
+				}
 			}
 			DatasourceDatabaseCli hive = new DatasourceDatabaseCli(dataBaseType.pluginId, dsUsernamePasswordAuth.getAddress(),
 					dsUsernamePasswordAuth.getInstanceName(), String.valueOf(dsUsernamePasswordAuth.getPort()),

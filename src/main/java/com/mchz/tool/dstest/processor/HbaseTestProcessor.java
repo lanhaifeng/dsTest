@@ -1,5 +1,6 @@
 package com.mchz.tool.dstest.processor;
 
+import com.mchz.tool.dstest.domain.DsConnection;
 import com.mchz.tool.dstest.domain.auth.DsKerberosAuth;
 import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
 import com.mchz.tool.dstest.enums.DBType;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author lanhaifeng
  * @since
  **/
-public class HbaseTestProcessor extends AbstractDsTestProcessor {
+public class HbaseTestProcessor extends HiveProcessor {
 
 	@Override
 	public List<DBType> getSupportDbTypes() {
@@ -23,13 +24,7 @@ public class HbaseTestProcessor extends AbstractDsTestProcessor {
 	}
 
 	@Override
-	public boolean validateUsernamePasswordAuth(DsUsernamePasswordAuth dsUsernamePasswordAuth) {
-		return super.validateUsernamePasswordAuth(dsUsernamePasswordAuth);
+	protected boolean validateNoAuth(DsConnection dsConnection) {
+		return validateUsernamePasswordAuth((DsUsernamePasswordAuth) dsConnection);
 	}
-
-	@Override
-	public boolean validateKerberosAuth(DsKerberosAuth dsKerberosAuth) {
-		return super.validateKerberosAuth(dsKerberosAuth);
-	}
-
 }

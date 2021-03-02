@@ -2,6 +2,7 @@ package com.mchz.tool.dstest.processor;
 
 import com.mchz.datasource.cli.DatasourceDatabaseCli;
 import com.mchz.mcdatasource.core.DataBaseType;
+import com.mchz.mcdatasource.core.DatasourceConstant;
 import com.mchz.tool.dstest.constants.DsTestConstant;
 import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
 import com.mchz.tool.dstest.enums.DBType;
@@ -9,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * soc
@@ -34,10 +36,16 @@ public class DatabaseCliProcessor extends AbstractDsTestProcessor {
 			if(StringUtils.isBlank(dbName)){
 				dbName = dsUsernamePasswordAuth.getServiceName();
 			}
+			Properties properties = new Properties();
+			if(dataBaseType == DataBaseType.INFORMIX){
+				if(StringUtils.isNotBlank(dsUsernamePasswordAuth.getServiceName())){
+					properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, dsUsernamePasswordAuth.getServiceName());
+				}
+			}
 			DatasourceDatabaseCli datasourceDatabase =
 					new DatasourceDatabaseCli(dataBaseType.pluginId,
 							dsUsernamePasswordAuth.getAddress(), dbName, String.valueOf(dsUsernamePasswordAuth.getPort()),
-							dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword(), true);
+							dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword(), true, properties);
 			datasourceDatabase.connect(true);
 			return true;
 		} catch (Exception e) {

@@ -157,6 +157,14 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 				return DataBaseType.GBASE8A;
 			case K_DB:
 				return DataBaseType.KDB;
+			case HBASE:
+				return DataBaseType.HBASE;
+			case MARIADB:
+				return DataBaseType.MARIADB;
+			case HIGHGODB:
+				return DataBaseType.HIGHGO;
+			case INFORMIX:
+				return DataBaseType.INFORMIX;
 		}
 
 		return null;

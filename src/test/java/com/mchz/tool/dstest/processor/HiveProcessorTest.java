@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class HiveProcessorTest {
 
 	private HiveProcessor hiveProcessor = new HiveProcessor();
@@ -38,8 +36,8 @@ public class HiveProcessorTest {
 		dsKerberosAuth.setInstanceName("default");
 
 		dsKerberosAuth.setPrincipal("hive/hadoop.hadoop.com@HADOOP.COM");
-		dsKerberosAuth.setClientKeyTabFile(HiveProcessorTest.class.getClassLoader().getResource("user.keytab").getFile());
-		dsKerberosAuth.setConfigFile(HiveProcessorTest.class.getClassLoader().getResource("krb5.conf").getFile());
+		dsKerberosAuth.setClientKeyTabFile(HiveProcessorTest.class.getClassLoader().getResource("hive/user.keytab").getFile());
+		dsKerberosAuth.setConfigFile(HiveProcessorTest.class.getClassLoader().getResource("hive/krb5.conf").getFile());
 
 		Assert.assertTrue("hive测试连接失败", hiveProcessor.validateKerberosAuth(dsKerberosAuth));
 	}

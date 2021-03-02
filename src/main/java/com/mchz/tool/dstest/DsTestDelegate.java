@@ -114,6 +114,7 @@ public class DsTestDelegate {
 		extendProcessors.put(DBType.REDIS, new RedisTestProcessor());
 		extendProcessors.put(DBType.ELASTICSEARCH, new ElasticSearchTestProcessor());
 		extendProcessors.put(DBType.HIVE, new HiveProcessor());
+		extendProcessors.put(DBType.HBASE, new HbaseTestProcessor());
 		extendProcessors.put(DBType.MONGODB, new MongoDBTestProcessor());
 	}
 }

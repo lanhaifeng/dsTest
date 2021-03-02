@@ -19,9 +19,8 @@ public class DsTestConstant {
 	 * 使用JdbcTestProcessor的数据库集合
 	 */
 	public static List<DBType> jdbcDbTypes = Arrays.asList(
-			DBType.KINGBASE, DBType.MARIADB,
+			DBType.INFORMIX, DBType.MARIADB, DBType.HIGHGODB,
 			DBType.GBASE,
-			DBType.HIGHGODB, DBType.OSCAR, DBType.INFORMIX,
 			DBType.RDS_MYSQL, DBType.RDS_POSTGRESQL, DBType.RDS_SQLSERVER
 			);
 
@@ -29,5 +28,6 @@ public class DsTestConstant {
 	 * 使用DatabaseCliProcessor的数据库集合
 	 */
 	public static List<DBType> databaseCliDbTypes = Arrays.asList(DBType.SYBASE, DBType.DAMENG, DBType.ORACLE,
-			DBType.GREENPLUM, DBType.SQLSERVER, DBType.DB2, DBType.MYSQL, DBType.POSTGRESQL, DBType.K_DB);
+			DBType.OSCAR,
+			DBType.KINGBASE, DBType.GREENPLUM, DBType.SQLSERVER, DBType.DB2, DBType.MYSQL, DBType.POSTGRESQL, DBType.K_DB);
 }

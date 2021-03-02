@@ -79,8 +79,8 @@ public class DatabaseCliProcessorTest {
 		properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, "chail@HADOOP.COM");
 		properties.setProperty(DatasourceConstant.KEY_DB_HIVE_PRINCIPAL, "hive/hadoop.hadoop.com@HADOOP.COM");
 
-		String keytab = Base64.encode(new FileReader(DatabaseCliProcessorTest.class.getClassLoader().getResource("user.keytab").getFile()).readBytes());
-		String krb5 = Base64.encode(new FileReader(DatabaseCliProcessorTest.class.getClassLoader().getResource("krb5.conf").getFile()).readBytes());
+		String keytab = Base64.encode(new FileReader(DatabaseCliProcessorTest.class.getClassLoader().getResource("hive/user.keytab").getFile()).readBytes());
+		String krb5 = Base64.encode(new FileReader(DatabaseCliProcessorTest.class.getClassLoader().getResource("hive/krb5.conf").getFile()).readBytes());
 		properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_KEYTAB_CONTENT, keytab);
 		properties.setProperty(DatasourceConstant.KEY_DB_KRB5_CONTENT, krb5);
 		return properties;
@@ -88,9 +88,9 @@ public class DatabaseCliProcessorTest {
 
 	public Properties kerberosPath() {
 		Properties properties = new Properties();
-		properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_KEYTAB_PATH, DatabaseCliProcessorTest.class.getClassLoader().getResource("user.keytab").getPath());
+		properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_KEYTAB_PATH, DatabaseCliProcessorTest.class.getClassLoader().getResource("hive/user.keytab").getPath());
 		properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, "chail@HADOOP.COM");
-		properties.setProperty(DatasourceConstant.KEY_DB_KRB5_PATH, HiveProcessor.class.getClassLoader().getResource("krb5.conf").getFile());
+		properties.setProperty(DatasourceConstant.KEY_DB_KRB5_PATH, HiveProcessor.class.getClassLoader().getResource("hive/krb5.conf").getFile());
 		properties.setProperty(DatasourceConstant.KEY_DB_HIVE_PRINCIPAL, "hive/hadoop.hadoop.com@HADOOP.COM");
 		return properties;
 	}
@@ -112,5 +112,21 @@ public class DatabaseCliProcessorTest {
 		DatasourceDatabaseCli hive = new DatasourceDatabaseCli(
 				DataBaseType.HIVE_FHD653.pluginId, "192.168.51.84", "default", "21066", "hive", "hive", properties);
 		hive.connect(true);
+	}
+
+	@Test
+	public void mariadbConnectTest() throws Exception {
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.MARIADB.id, "192.168.202.128", "mysql", "3306", "root", "hzmcdba", true);
+		datasourceDatabase.connect(true);
+	}
+
+	@Test
+	public void informixConnectTest() throws Exception {
+		Properties properties = new Properties();
+		properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, "demoserver");
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.INFORMIX.id, "192.168.202.45", "test2", "1528", "informix", "informix", true,properties);
+		datasourceDatabase.connect(true);
 	}
 }
