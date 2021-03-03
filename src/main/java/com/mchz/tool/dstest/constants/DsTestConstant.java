@@ -19,15 +19,16 @@ public class DsTestConstant {
 	 * 使用JdbcTestProcessor的数据库集合
 	 */
 	public static List<DBType> jdbcDbTypes = Arrays.asList(
-			DBType.INFORMIX, DBType.MARIADB, DBType.HIGHGODB,
-			DBType.GBASE,
-			DBType.RDS_MYSQL, DBType.RDS_POSTGRESQL, DBType.RDS_SQLSERVER
+
 			);
 
 	/**
 	 * 使用DatabaseCliProcessor的数据库集合
 	 */
-	public static List<DBType> databaseCliDbTypes = Arrays.asList(DBType.SYBASE, DBType.DAMENG, DBType.ORACLE,
-			DBType.OSCAR,
-			DBType.KINGBASE, DBType.GREENPLUM, DBType.SQLSERVER, DBType.DB2, DBType.MYSQL, DBType.POSTGRESQL, DBType.K_DB);
+	public static List<DBType> databaseCliDbTypes = Arrays.asList(
+			DBType.GBASE, DBType.SYBASE, DBType.DAMENG, DBType.ORACLE,
+			DBType.REDIS, DBType.MONGODB, DBType.ELASTICSEARCH,
+			DBType.MARIADB, DBType.HIGHGODB, DBType.INFORMIX, DBType.OSCAR,
+			DBType.KINGBASE, DBType.GREENPLUM, DBType.SQLSERVER, DBType.DB2, DBType.MYSQL, DBType.POSTGRESQL, DBType.K_DB,
+			DBType.RDS_MYSQL, DBType.RDS_POSTGRESQL, DBType.RDS_SQLSERVER);
 }

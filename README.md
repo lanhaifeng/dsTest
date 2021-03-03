@@ -120,7 +120,12 @@ setProperty(DatasourceConstant.MCDATASOURCE_HOME,  "/data/mcdatasource");
             <artifactId>mongo-java-driver</artifactId>
             <version>2.13.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+        
         <!-- informix driver -->
         <dependency>
             <groupId>com.ibm.informix</groupId>

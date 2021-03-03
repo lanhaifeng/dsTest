@@ -10,7 +10,6 @@ import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
 import com.mchz.tool.dstest.enums.DBType;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.junit.Before;
@@ -53,7 +52,7 @@ public class HbaseTestProcessorTest {
 		config.setInt("hbase.client.retries.number", 2);
 		Connection connection = ConnectionFactory.createConnection(config);
 
-		TableName[] tableNames = connection.getAdmin().listTableNames();
+		connection.getAdmin().listTableNames();
 	}
 
 	@Test
@@ -81,7 +80,7 @@ public class HbaseTestProcessorTest {
 	public void testHbase5() {
 		dsUsernamePasswordAuth.setAddress("192.168.239.1");
 		dsUsernamePasswordAuth.setPort(2181);
-		dsKerberosAuth.setDbType(DBType.HBASE.getDbTypeValue());
+		dsUsernamePasswordAuth.setDbType(DBType.HBASE.getDbTypeValue());
 
 		org.junit.Assert.assertTrue("hbase测试连接失败", hbaseTestProcessor.validateUsernamePasswordAuth(dsUsernamePasswordAuth));
 	}

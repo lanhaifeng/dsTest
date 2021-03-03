@@ -141,32 +141,30 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 				return dataBaseType;
 			}
 		}
-		switch (dbType){
+		switch (dbType) {
 			case SQLSERVER:
+			case RDS_SQLSERVER:
 				return DataBaseType.MSSQL;
 			case POSTGRESQL:
 				return DataBaseType.PGSQL;
 			case DAMENG:
 				return DataBaseType.DM;
 			case HIVE:
-				if(dbAuthMode == DBAuthMode.KERBEROS_AUTH){
+				if (dbAuthMode == DBAuthMode.KERBEROS_AUTH) {
 					return DataBaseType.HIVE_FHD653;
 				}
 				return DataBaseType.HIVE;
 			case GBASE:
 				return DataBaseType.GBASE8A;
-			case K_DB:
-				return DataBaseType.KDB;
-			case HBASE:
-				return DataBaseType.HBASE;
-			case MARIADB:
-				return DataBaseType.MARIADB;
 			case HIGHGODB:
 				return DataBaseType.HIGHGO;
-			case INFORMIX:
-				return DataBaseType.INFORMIX;
+			case RDS_MYSQL:
+				return DataBaseType.RDS_MYSQL;
+			case RDS_POSTGRESQL:
+				return DataBaseType.RDS_PGSQL;
+			default:
+				return DataBaseType.getDataBaseTypyByDriverTypeAndVersion(dbType.getDbTypeValue());
 		}
 
-		return null;
 	}
 }

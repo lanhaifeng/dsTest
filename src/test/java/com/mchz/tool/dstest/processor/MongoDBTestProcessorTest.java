@@ -1,11 +1,8 @@
 package com.mchz.tool.dstest.processor;
 
-import com.mchz.tool.dstest.domain.auth.DsKerberosAuth;
 import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class MongoDBTestProcessorTest {
 
@@ -17,6 +14,7 @@ public class MongoDBTestProcessorTest {
 		dsUsernamePasswordAuth.setAddress("192.168.202.2");
 		dsUsernamePasswordAuth.setPort(27017);
 
+		Assert.assertTrue("mongo测试服务失败", mongoProcessor.testService(dsUsernamePasswordAuth.getAddress(), dsUsernamePasswordAuth.getPort()));
 		Assert.assertTrue("mongo测试连接失败", mongoProcessor.validateNoAuth(dsUsernamePasswordAuth));
 	}
 

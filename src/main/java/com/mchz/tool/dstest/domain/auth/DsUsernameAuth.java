@@ -2,7 +2,6 @@ package com.mchz.tool.dstest.domain.auth;
 
 import com.mchz.tool.dstest.domain.DsConnection;
 import com.mchz.tool.dstest.enums.DBAuthMode;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * soc
@@ -19,7 +18,6 @@ public class DsUsernameAuth extends DsConnection {
 	 */
 	private String userName;
 
-	@NotEmpty(message = "用户名为空")
 	public String getUserName() {
 		return userName;
 	}

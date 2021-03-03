@@ -1,7 +1,6 @@
 package com.mchz.tool.dstest.domain.auth;
 
 import com.mchz.tool.dstest.enums.DBAuthMode;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * soc
@@ -31,7 +30,6 @@ public class DsKerberosAuth extends DsUsernamePasswordAuth {
 	/**
 	 * kerberos的principal
 	 */
-	@NotEmpty(message = "kerberos认证参数principal为空")
 	private String principal;
 
 	public void setConfigFile(String configFile) {

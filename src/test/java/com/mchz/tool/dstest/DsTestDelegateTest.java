@@ -7,11 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mariadb.jdbc.Driver;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DsTestDelegateTest {
 
@@ -116,13 +113,6 @@ public class DsTestDelegateTest {
 
 		Assert.assertTrue("测试Mariadb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Mariadb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
-
-		Properties properties = new Properties();
-		properties.put("user", "root");
-		properties.put("password", "hzmcdba");
-		Driver driver = new Driver();
-		Connection connection = driver.connect("jdbc:mariadb://192.168.202.128:3306/", properties);
-		System.out.println(connection);
 	}
 
 	@Test
@@ -319,4 +309,39 @@ public class DsTestDelegateTest {
 		Assert.assertTrue("测试Mongodb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Mongodb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
+
+	@Test
+	@Ignore
+	public void testRDSMysqlConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setDbType(DBType.RDS_MYSQL.getDbTypeValue());
+		auth.setAddress("192.168.239.71");
+		auth.setPort(3306);
+		auth.setUserName("root");
+		auth.setPassword("mysql");
+		auth.setInstanceName("mysql");
+
+		Assert.assertTrue("测试RDS_MySQL服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试RDS_MySQL连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testRDSPGConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setDbType(DBType.RDS_POSTGRESQL.getDbTypeValue());
+		auth.setAddress("192.168.241.103");
+		auth.setPort(5432);
+		auth.setUserName("dm");
+		auth.setPassword("hzmcdm");
+		auth.setInstanceName("dm");
+
+		Assert.assertTrue("测试RDS_PG服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试RDS_PG连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
 }

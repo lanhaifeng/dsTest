@@ -124,9 +124,49 @@ public class DatabaseCliProcessorTest {
 	@Test
 	public void informixConnectTest() throws Exception {
 		Properties properties = new Properties();
-		properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, "demoserver");
+//		properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, "demoserver");
 		DatasourceDatabaseCli datasourceDatabase =
 				new DatasourceDatabaseCli(DataBaseType.INFORMIX.id, "192.168.202.45", "test2", "1528", "informix", "informix", true,properties);
 		datasourceDatabase.connect(true);
 	}
+
+	@Test
+	public void rdsMysqlConnectTest() throws Exception {
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.RDS_MYSQL.id, "192.168.239.71", "mysql", "3306", "root", "mysql", true);
+		datasourceDatabase.connect(true);
+	}
+
+	@Test
+	public void pgConnectTest() throws Exception {
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.PGSQL.id, "192.168.241.103", "dm", "5432", "dm", "hzmcdm", true);
+		datasourceDatabase.connect(true);
+	}
+
+	@Test
+	public void redisConnectTest() throws Exception {
+		Properties properties = new Properties();
+		properties.setProperty(DatasourceConstant.KEY_PLIGIN_LODE_LOCAL_CLASSLOADER_ENABLE, "false");
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.REDIS.id, "192.168.242.43", "redis", "7000", null, null, true, properties);
+		datasourceDatabase.connect(true);
+	}
+
+	@Test
+	public void elasticsearchConnectTest() throws Exception {
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.ELASTICSEARCH.id, "192.168.99.149", "", "9200", null, null, true);
+		datasourceDatabase.connect(true);
+	}
+
+	@Test
+	public void mongoConnectTest() throws Exception {
+		Properties properties = new Properties();
+		properties.setProperty(DatasourceConstant.KEY_PLIGIN_LODE_LOCAL_CLASSLOADER_ENABLE, "false");
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.MONGODB.id, "192.168.202.2", "test", "27017", "test", "test", true, properties);
+		datasourceDatabase.connect(true);
+	}
+
 }

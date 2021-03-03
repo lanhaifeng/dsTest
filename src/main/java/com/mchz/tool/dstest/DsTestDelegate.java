@@ -1,6 +1,5 @@
 package com.mchz.tool.dstest;
 
-import cn.hutool.core.lang.Assert;
 import com.mchz.mcdatasource.core.DatasourceConstant;
 import com.mchz.tool.dstest.constants.DsTestConstant;
 import com.mchz.tool.dstest.domain.DsConnection;
@@ -94,6 +93,10 @@ public class DsTestDelegate {
 			if(Objects.isNull(processor) && DsTestConstant.databaseCliDbTypes.contains(dbType)){
 				processor = processors.get(DatabaseCliProcessor.class);
 			}
+			//默认使用DatabaseCliProcessor测试连接
+			if(Objects.isNull(processor)){
+				processor = processors.get(DatabaseCliProcessor.class);
+			}
 		}
 
 		return processor;
@@ -108,7 +111,9 @@ public class DsTestDelegate {
 	 * @return void
 	 */
 	private void init(){
-		Assert.state(StringUtils.isNotBlank(System.getProperty(DatasourceConstant.MCDATASOURCE_HOME)), "MCDATASOURCE_HOME未设置");
+		if(StringUtils.isBlank(System.getProperty(DatasourceConstant.MCDATASOURCE_HOME))){
+			throw new RuntimeException("MCDATASOURCE_HOME未设置");
+		}
 		processors.put(JdbcTestProcessor.class, new JdbcTestProcessor());
 		processors.put(DatabaseCliProcessor.class, new DatabaseCliProcessor());
 		extendProcessors.put(DBType.REDIS, new RedisTestProcessor());
