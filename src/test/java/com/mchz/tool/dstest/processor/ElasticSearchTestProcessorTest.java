@@ -11,7 +11,7 @@ public class ElasticSearchTestProcessorTest {
 
 	@Test
 	public void validateNoAuth() {
-		dsUsernamePasswordAuth.setAddress("192.168.230.156");
+		dsUsernamePasswordAuth.setAddress("192.168.40.12");
 		dsUsernamePasswordAuth.setPort(9200);
 
 		Assert.assertTrue("ElasticSearch测试连接失败", processor.validateUsernamePasswordAuth(dsUsernamePasswordAuth));

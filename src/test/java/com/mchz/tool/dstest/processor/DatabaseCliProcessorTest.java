@@ -25,7 +25,7 @@ public class DatabaseCliProcessorTest {
 
 	@Test
 	public void testMysql() {
-		dsUsernamePasswordAuth.setAddress("192.168.230.156");
+		dsUsernamePasswordAuth.setAddress("192.168.230.157");
 		dsUsernamePasswordAuth.setPort(13306);
 		dsUsernamePasswordAuth.setUserName("socusr");
 		dsUsernamePasswordAuth.setPassword("hzmc321#");
@@ -51,8 +51,8 @@ public class DatabaseCliProcessorTest {
 	public void testGbase1() throws Exception {
 		System.setProperty(DatasourceConstant.MCDATASOURCE_HOME, "F:\\mcdatasource");
 
-		DatasourceDatabaseCli gbase1 = new DatasourceDatabaseCli(DataBaseType.GBASE8T.id,
-				"192.168.238.214", "ylhzmc", "5258", "sysdba", "sysdba");
+		DatasourceDatabaseCli gbase1 = new DatasourceDatabaseCli(DataBaseType.GBASE8A.id,
+				"192.168.238.214", "ylhzmc", "5258", "sysdba", "gbase");
 		gbase1.connect(true);
 	}
 
@@ -149,14 +149,24 @@ public class DatabaseCliProcessorTest {
 		Properties properties = new Properties();
 		properties.setProperty(DatasourceConstant.KEY_PLIGIN_LODE_LOCAL_CLASSLOADER_ENABLE, "false");
 		DatasourceDatabaseCli datasourceDatabase =
-				new DatasourceDatabaseCli(DataBaseType.REDIS.id, "192.168.242.43", "redis", "7000", null, null, true, properties);
+				new DatasourceDatabaseCli(DataBaseType.REDIS.id, "192.168.40.12", "", "16379", null, null, true, properties);
+		datasourceDatabase.connect(true);
+	}
+
+	@Test
+	public void redisConnectTest2() throws Exception {
+		Properties properties = new Properties();
+		properties.setProperty(DatasourceConstant.KEY_PLIGIN_LODE_LOCAL_CLASSLOADER_ENABLE, "false");
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.REDIS.id, "192.168.230.157", "", "18379", null, "Zu5mIJN5AjWHpFv3jAiCPBOJzKnq0baiZ", true, properties);
 		datasourceDatabase.connect(true);
 	}
 
 	@Test
 	public void elasticsearchConnectTest() throws Exception {
+		Properties properties = new Properties();
 		DatasourceDatabaseCli datasourceDatabase =
-				new DatasourceDatabaseCli(DataBaseType.ELASTICSEARCH.id, "192.168.99.149", "", "9200", null, null, true);
+				new DatasourceDatabaseCli(DataBaseType.ELASTICSEARCH.id, "192.168.40.12", "", "9200", null, null, true, properties);
 		datasourceDatabase.connect(true);
 	}
 

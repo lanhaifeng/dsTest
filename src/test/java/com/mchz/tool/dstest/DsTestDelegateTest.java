@@ -30,7 +30,7 @@ public class DsTestDelegateTest {
 	public void testMysqlConnection() {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
-		auth.setAddress("192.168.230.156");
+		auth.setAddress("192.168.230.157");
 		auth.setPort(13306);
 		auth.setInstanceName("soc");
 		auth.setDbType(DBType.MYSQL.getDbTypeValue());
@@ -321,7 +321,7 @@ public class DsTestDelegateTest {
 		auth.setPort(3306);
 		auth.setUserName("root");
 		auth.setPassword("mysql");
-		auth.setInstanceName("mysql");
+//		auth.setInstanceName("mysql");
 
 		Assert.assertTrue("测试RDS_MySQL服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试RDS_MySQL连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
@@ -344,4 +344,59 @@ public class DsTestDelegateTest {
 		Assert.assertTrue("测试RDS_PG连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
 	}
 
+
+	@Test
+	public void testElasticSearchConnection() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.40.12");
+		auth.setPort(9200);
+		auth.setDbType(DBType.ELASTICSEARCH.getDbTypeValue());
+
+		Assert.assertTrue("测试ElasticSearch服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试ElasticSearch连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	public void testMongoConnection1() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.2");
+		auth.setPort(27017);
+
+		auth.setDbType(DBType.MONGODB.getDbTypeValue());
+
+		Assert.assertTrue("测试Mongo服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Mongo连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	public void testMongoConnection2() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.2");
+		auth.setPort(27017);
+		auth.setUserName("test");
+		auth.setPassword("test");
+		auth.setInstanceName("test");
+
+		auth.setDbType(DBType.MONGODB.getDbTypeValue());
+
+		Assert.assertTrue("测试Mongo服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Mongo连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	public void testRedisConnection1() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.230.157");
+		auth.setPort(18379);
+		auth.setPassword("Zu5mIJN5AjWHpFv3jAiCPBOJzKnq0baiZ");
+
+		auth.setDbType(DBType.REDIS.getDbTypeValue());
+
+		Assert.assertTrue("测试Redis服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Redis连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
 }

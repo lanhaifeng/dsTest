@@ -116,10 +116,10 @@ public class DsTestDelegate {
 		}
 		processors.put(JdbcTestProcessor.class, new JdbcTestProcessor());
 		processors.put(DatabaseCliProcessor.class, new DatabaseCliProcessor());
-		extendProcessors.put(DBType.REDIS, new RedisTestProcessor());
-		extendProcessors.put(DBType.ELASTICSEARCH, new ElasticSearchTestProcessor());
+//		extendProcessors.put(DBType.REDIS, new RedisTestProcessor());
+//		extendProcessors.put(DBType.ELASTICSEARCH, new ElasticSearchTestProcessor());
 		extendProcessors.put(DBType.HIVE, new HiveProcessor());
 		extendProcessors.put(DBType.HBASE, new HbaseTestProcessor());
-		extendProcessors.put(DBType.MONGODB, new MongoDBTestProcessor());
+//		extendProcessors.put(DBType.MONGODB, new MongoDBTestProcessor());
 	}
 }
