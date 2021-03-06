@@ -46,7 +46,9 @@ public class HiveProcessor extends AbstractDsTestProcessor {
 				String krb5 = Base64.encode(new FileReader(dsKerberosAuth.getConfigFile()).readBytes());
 				properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_KEYTAB_CONTENT, keytab);
 				properties.setProperty(DatasourceConstant.KEY_DB_KRB5_CONTENT, krb5);
-				properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, dsUsernamePasswordAuth.getUserName());
+				if(StringUtils.isNotBlank(dsUsernamePasswordAuth.getUserName())){
+					properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, dsUsernamePasswordAuth.getUserName());
+				}
 				if(dataBaseType == DataBaseType.HIVE){
 					dataBaseType = DataBaseType.HIVE_FHD653;
 				}
