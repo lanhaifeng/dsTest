@@ -6,8 +6,8 @@ import com.mchz.tool.dstest.domain.auth.DsKerberosAuth;
 import com.mchz.tool.dstest.domain.auth.DsLdapAuth;
 import com.mchz.tool.dstest.domain.auth.DsUsernameAuth;
 import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
-import com.mchz.tool.dstest.enums.DBType;
 import com.mchz.tool.dstest.enums.DBAuthMode;
+import com.mchz.tool.dstest.enums.DBType;
 import com.mchz.tool.dstest.exception.NotSupportDbAuthException;
 import com.mchz.tool.dstest.util.IpUtils;
 import com.mchz.tool.dstest.util.ValidateUtils;
@@ -136,11 +136,7 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 		if(Objects.isNull(dbType)){
 			return null;
 		}
-		for(DataBaseType dataBaseType : DataBaseType.values()){
-			if(dataBaseType.id.equalsIgnoreCase(dbType.getDbTypeValue())){
-				return dataBaseType;
-			}
-		}
+
 		switch (dbType) {
 			case SQLSERVER:
 			case RDS_SQLSERVER:
