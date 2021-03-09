@@ -48,6 +48,15 @@ public class DatabaseCliProcessorTest {
 	}
 
 	@Test
+	public void testOracle1() throws Exception {
+		System.setProperty(DatasourceConstant.MCDATASOURCE_HOME, "F:\\mcdatasource");
+
+		DatasourceDatabaseCli gbase1 = new DatasourceDatabaseCli(DataBaseType.ORACLE.id,
+				"192.168.240.227", "ORCL", "1521", "c##sh", "sh");
+		gbase1.connect(true);
+	}
+
+	@Test
 	public void testGbase1() throws Exception {
 		System.setProperty(DatasourceConstant.MCDATASOURCE_HOME, "F:\\mcdatasource");
 
@@ -124,7 +133,7 @@ public class DatabaseCliProcessorTest {
 	@Test
 	public void informixConnectTest() throws Exception {
 		Properties properties = new Properties();
-//		properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, "demoserver");
+		properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, "demoserver");
 		DatasourceDatabaseCli datasourceDatabase =
 				new DatasourceDatabaseCli(DataBaseType.INFORMIX.id, "192.168.202.45", "test2", "1528", "informix", "informix", true,properties);
 		datasourceDatabase.connect(true);
@@ -179,4 +188,11 @@ public class DatabaseCliProcessorTest {
 		datasourceDatabase.connect(true);
 	}
 
+	@Test
+	public void kingbaseConnectTest() throws Exception {
+		DatasourceDatabaseCli datasourceDatabase =
+				new DatasourceDatabaseCli(DataBaseType.KINGBASE8.id, "192.168.202.60",
+						"TEST", "54321", "SYSTEM", "system", true);
+		datasourceDatabase.connect(true);
+	}
 }

@@ -134,6 +134,24 @@ public class DsTestDelegateTest {
 
 	@Test
 	@Ignore
+	public void testHighgodbConnection2() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.128");
+		auth.setPort(5866);
+		auth.setDbType(DBType.HIGHGODB.getDbTypeValue());
+
+		auth.setInstanceName("highgo");
+		auth.setUserName("highgo");
+		auth.setPassword("highgo123");
+
+		Assert.assertTrue("测试Highgodb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Highgodb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
 	public void testSqlServerConnection() {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 
@@ -234,6 +252,24 @@ public class DsTestDelegateTest {
 		auth.setInstanceName("HZMC_SYB12");
 		auth.setUserName("sa");
 		auth.setPassword("hzmcdba");
+
+		Assert.assertTrue("测试Sybase服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Sybase连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testSysbaseConnection2() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.50");
+		auth.setPort(8000);
+		auth.setDbType(DBType.SYBASE.getDbTypeValue());
+
+		auth.setInstanceName("HZMC_SYB12");
+		auth.setUserName("sa");
+		auth.setPassword("hzmcdba#");
 
 		Assert.assertTrue("测试Sybase服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Sybase连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));

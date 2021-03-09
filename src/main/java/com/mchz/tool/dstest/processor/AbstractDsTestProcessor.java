@@ -158,6 +158,8 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 				return DataBaseType.GBASE8A;
 			case HIGHGODB:
 				return DataBaseType.HIGHGO;
+			case KINGBASE:
+				return DataBaseType.KINGBASE8;
 			case RDS_MYSQL:
 				return DataBaseType.RDS_MYSQL;
 			case RDS_POSTGRESQL:
