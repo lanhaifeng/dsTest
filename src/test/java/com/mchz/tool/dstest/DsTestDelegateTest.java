@@ -30,7 +30,7 @@ public class DsTestDelegateTest {
 	public void testMysqlConnection() {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
-		auth.setAddress("192.168.230.157");
+		auth.setAddress("2001::192:168:230:156");
 		auth.setPort(13306);
 		auth.setInstanceName("soc");
 		auth.setDbType(DBType.MYSQL.getDbTypeValue());
