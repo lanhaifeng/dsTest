@@ -70,11 +70,11 @@ public class DsTestDelegateTest {
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
 		auth.setAddress("192.168.238.214");
 		auth.setPort(5258);
-		auth.setInstanceName("ylhzmc");
+//		auth.setInstanceName("ylhzmc");
 		auth.setDbType(DBType.GBASE.getDbTypeValue());
 
-		auth.setUserName("sysdba");
-		auth.setPassword("gbase");
+//		auth.setUserName("sysdba");
+//		auth.setPassword("gbase");
 
 		Assert.assertTrue("测试gbase服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试gbase连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
@@ -89,6 +89,24 @@ public class DsTestDelegateTest {
 		auth.setAddress("192.168.202.13");
 		auth.setPort(1521);
 		auth.setInstanceName("ora9i");
+		auth.setDbType(DBType.ORACLE.getDbTypeValue());
+
+		auth.setUserName("system");
+		auth.setPassword("oracle");
+
+		Assert.assertTrue("测试oracle服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试oracle连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testOracleConnection2() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.74");
+		auth.setPort(1521);
+		auth.setInstanceName("ora19c");
 		auth.setDbType(DBType.ORACLE.getDbTypeValue());
 
 		auth.setUserName("system");
@@ -127,6 +145,7 @@ public class DsTestDelegateTest {
 
 		auth.setUserName("highgo");
 		auth.setPassword("highgo");
+		auth.setInstanceName("highgo");
 
 		Assert.assertTrue("测试Highgodb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Highgodb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
@@ -320,7 +339,7 @@ public class DsTestDelegateTest {
 		auth.setPort(1528);
 		auth.setDbType(DBType.INFORMIX.getDbTypeValue());
 
-//		auth.setServiceName("demoserver");
+		auth.setServiceName("demoserver");
 		auth.setInstanceName("test2");
 		auth.setUserName("informix");
 		auth.setPassword("informix");
@@ -338,9 +357,9 @@ public class DsTestDelegateTest {
 		auth.setDbType(DBType.MONGODB.getDbTypeValue());
 		auth.setAddress("192.168.202.2");
 		auth.setPort(27017);
-		auth.setUserName("test");
-		auth.setPassword("test");
-		auth.setInstanceName("test");
+		auth.setUserName("test1");
+		auth.setPassword("test1");
+//		auth.setInstanceName("test");
 
 		Assert.assertTrue("测试Mongodb服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Mongodb连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
@@ -388,6 +407,20 @@ public class DsTestDelegateTest {
 		auth.setAddress("192.168.40.12");
 		auth.setPort(9200);
 		auth.setDbType(DBType.ELASTICSEARCH.getDbTypeValue());
+
+		Assert.assertTrue("测试ElasticSearch服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试ElasticSearch连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	public void testElasticSearchConnection2() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.242.41");
+		auth.setPort(9200);
+		auth.setDbType(DBType.ELASTICSEARCH.getDbTypeValue());
+		auth.setUserName("elastic");
+		auth.setPassword("pfiMylaEU0GDdT3acWFW");
 
 		Assert.assertTrue("测试ElasticSearch服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试ElasticSearch连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));

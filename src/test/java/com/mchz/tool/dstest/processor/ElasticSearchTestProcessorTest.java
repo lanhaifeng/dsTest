@@ -27,4 +27,15 @@ public class ElasticSearchTestProcessorTest {
 
 		Assert.assertTrue("ElasticSearch测试连接失败", processor.validateUsernamePasswordAuth(dsUsernamePasswordAuth));
 	}
+
+	@Test
+	public void validateUsernamePasswordAuth2() {
+		dsUsernamePasswordAuth.setAddress("192.168.242.40");
+		dsUsernamePasswordAuth.setPort(9900);
+		dsUsernamePasswordAuth.setUserName("elastic");
+		dsUsernamePasswordAuth.setPassword("pfiMylaEU0GDdT3acWFW");
+
+		Assert.assertTrue("测试ElasticSearch服务失败", processor.testService(dsUsernamePasswordAuth.getAddress(), dsUsernamePasswordAuth.getPort()));
+		Assert.assertTrue("ElasticSearch测试连接失败", processor.validateUsernamePasswordAuth(dsUsernamePasswordAuth));
+	}
 }

@@ -44,4 +44,21 @@ public class HiveProcessorTest {
 
 		Assert.assertTrue("hive测试连接失败", hiveProcessor.validateKerberosAuth(dsKerberosAuth));
 	}
+
+	@Test
+	public void validateKerberosAuth2() {
+		dsKerberosAuth.setAddress("192.168.200.167");
+		dsKerberosAuth.setPort(10000);
+		dsKerberosAuth.setUserName("hive/cdh01@CDH167.COM");
+		dsKerberosAuth.setPassword("hive");
+		dsKerberosAuth.setInstanceName("ycc");
+		//要使用DataBaseType.HIVE的插件驱动
+		dsKerberosAuth.setDbType(DBType.HIVE.getDbTypeValue());
+
+		dsKerberosAuth.setPrincipal("hive/cdh01@CDH167.COM");
+		dsKerberosAuth.setClientKeyTabFile(HiveProcessorTest.class.getClassLoader().getResource("hive/cdh5_user.keytab").getFile());
+		dsKerberosAuth.setConfigFile(HiveProcessorTest.class.getClassLoader().getResource("hive/cdh5_krb5.conf").getFile());
+
+		Assert.assertTrue("hive测试连接失败", hiveProcessor.validateKerberosAuth(dsKerberosAuth));
+	}
 }

@@ -49,9 +49,6 @@ public class HiveProcessor extends AbstractDsTestProcessor {
 				if(StringUtils.isNotBlank(dsUsernamePasswordAuth.getUserName())){
 					properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, dsUsernamePasswordAuth.getUserName());
 				}
-				if(dataBaseType == DataBaseType.HIVE){
-					dataBaseType = DataBaseType.HIVE_FHD653;
-				}
 			}
 			DatasourceDatabaseCli hive = new DatasourceDatabaseCli(dataBaseType.pluginId, dsUsernamePasswordAuth.getAddress(),
 					dsUsernamePasswordAuth.getInstanceName(), String.valueOf(dsUsernamePasswordAuth.getPort()),

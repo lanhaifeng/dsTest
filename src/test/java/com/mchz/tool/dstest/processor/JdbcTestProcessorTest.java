@@ -1,8 +1,10 @@
 package com.mchz.tool.dstest.processor;
 
+import com.mchz.tool.dstest.DsTestDelegate;
 import com.mchz.tool.dstest.domain.auth.DsUsernamePasswordAuth;
 import com.mchz.tool.dstest.enums.DBType;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class JdbcTestProcessorTest {
@@ -49,5 +51,34 @@ public class JdbcTestProcessorTest {
 
 		Assert.assertTrue("测试Kingbase服务失败", jdbcTestProcessor.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试Kingbase连接失败", jdbcTestProcessor.validateUsernamePasswordAuth(auth));
+	}
+
+	@Test
+	public void testMariadb() {
+		auth.setAddress("192.168.202.128");
+		auth.setPort(3306);
+		auth.setDbType(DBType.MARIADB.getDbTypeValue());
+
+		auth.setUserName("root");
+		auth.setPassword("hzmcdba");
+		auth.setInstanceName("test");
+
+		Assert.assertTrue("测试Mariadb服务失败", jdbcTestProcessor.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试Mariadb连接失败", jdbcTestProcessor.validateUsernamePasswordAuth(auth));
+	}
+
+	@Test
+	@Ignore
+	public void testGbaseConnection() {
+		auth.setAddress("192.168.238.214");
+		auth.setPort(5258);
+		auth.setInstanceName("ylhzmc");
+		auth.setDbType(DBType.GBASE.getDbTypeValue());
+
+		auth.setUserName("sysdba");
+		auth.setPassword("gbase");
+
+		Assert.assertTrue("测试gbase服务失败", jdbcTestProcessor.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试gbase连接失败", jdbcTestProcessor.validateUsernamePasswordAuth(auth));
 	}
 }

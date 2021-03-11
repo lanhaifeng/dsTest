@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
  **/
 public class ValidateUtils {
 	private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+	private final static String MESSAGE_FORMATE = "[%s:%s]";
 
 	public static <T> List<String> validate(T t) {
 		return validate(t, null);
@@ -35,7 +36,7 @@ public class ValidateUtils {
 
 		List<String> messageList = new ArrayList<>();
 		for (ConstraintViolation<T> constraintViolation : constraintViolations) {
-			messageList.add(constraintViolation.getMessage());
+			messageList.add(String.format(MESSAGE_FORMATE, constraintViolation.getPropertyPath(), constraintViolation.getMessage()));
 		}
 		return messageList;
 	}

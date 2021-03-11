@@ -124,6 +124,24 @@ public class DatabaseCliProcessorTest {
 	}
 
 	@Test
+	public void testHive5() throws Exception {
+		System.setProperty(DatasourceConstant.MCDATASOURCE_HOME, "F:\\mcdatasource");
+
+		Properties properties = new Properties();
+		properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, "hive/cdh01@CDH167.COM");
+		properties.setProperty(DatasourceConstant.KEY_DB_HIVE_PRINCIPAL, "hive/cdh01@CDH167.COM");
+
+		String keytab = Base64.encode(new FileReader(DatabaseCliProcessorTest.class.getClassLoader().getResource("hive/cdh5_user.keytab").getFile()).readBytes());
+		String krb5 = Base64.encode(new FileReader(DatabaseCliProcessorTest.class.getClassLoader().getResource("hive/cdh5_krb5.conf").getFile()).readBytes());
+		properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_KEYTAB_CONTENT, keytab);
+		properties.setProperty(DatasourceConstant.KEY_DB_KRB5_CONTENT, krb5);
+
+		DatasourceDatabaseCli hive = new DatasourceDatabaseCli(
+				DataBaseType.HIVE.pluginId, "192.168.200.167", "ycc", "10000", "hive/cdh01@CDH167.COM", "hive", properties);
+		hive.connect(true);
+	}
+
+	@Test
 	public void mariadbConnectTest() throws Exception {
 		DatasourceDatabaseCli datasourceDatabase =
 				new DatasourceDatabaseCli(DataBaseType.MARIADB.id, "192.168.202.128", "mysql", "3306", "root", "hzmcdba", true);
@@ -142,7 +160,7 @@ public class DatabaseCliProcessorTest {
 	@Test
 	public void rdsMysqlConnectTest() throws Exception {
 		DatasourceDatabaseCli datasourceDatabase =
-				new DatasourceDatabaseCli(DataBaseType.RDS_MYSQL.id, "192.168.239.71", "mysql", "3306", "root", "mysql", true);
+				new DatasourceDatabaseCli(DataBaseType.RDS_MYSQL.id, "192.168.239.72", "mysql", "3306", "root", "mysql", true);
 		datasourceDatabase.connect(true);
 	}
 
