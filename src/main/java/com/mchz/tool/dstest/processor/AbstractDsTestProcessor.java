@@ -14,6 +14,7 @@ import com.mchz.tool.dstest.util.ValidateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -130,39 +131,62 @@ public abstract class AbstractDsTestProcessor implements DsTestProcessor {
 		throw new NotSupportDbAuthException(dsConnection.getDbTypeDict(), DBAuthMode.NO_AUTH);
 	}
 
-	protected DataBaseType toDataBaseType(DsConnection dsConnection){
+	protected List<DataBaseType> toDataBaseType(DsConnection dsConnection){
 		DBType dbType = dsConnection.getDbTypeDict();
-		DBAuthMode dbAuthMode = dsConnection.getDBAuthMode();
 		if(Objects.isNull(dbType)){
 			return null;
 		}
 
+		List<DataBaseType> dataBaseTypes = new ArrayList<>();
 		switch (dbType) {
+			case MYSQL:
+				dataBaseTypes.add(DataBaseType.MYSQL);
+				dataBaseTypes.add(DataBaseType.MYSQL_5);
+				dataBaseTypes.add(DataBaseType.MYSQL_8);
+				break;
 			case SQLSERVER:
 			case RDS_SQLSERVER:
-				return DataBaseType.MSSQL;
+				dataBaseTypes.add(DataBaseType.MSSQL);
+				break;
 			case POSTGRESQL:
-				return DataBaseType.PGSQL;
+				dataBaseTypes.add(DataBaseType.PGSQL);
+				break;
 			case DAMENG:
-				return DataBaseType.DM;
+				dataBaseTypes.add(DataBaseType.DM);
+				break;
 			case HIVE:
-				if (dbAuthMode == DBAuthMode.KERBEROS_AUTH) {
-					return DataBaseType.HIVE_FHD653;
-				}
-				return DataBaseType.HIVE;
+				dataBaseTypes.add(DataBaseType.HIVE);
+				dataBaseTypes.add(DataBaseType.HIVE_FHD653);
+				dataBaseTypes.add(DataBaseType.HIVE_TDH6);
+				dataBaseTypes.add(DataBaseType.HIVE_CDH634);
+				dataBaseTypes.add(DataBaseType.HIVE_APACHE121);
+				dataBaseTypes.add(DataBaseType.HIVE_HDP2650_121);
+				break;
 			case GBASE:
-				return DataBaseType.GBASE8A;
+				dataBaseTypes.add(DataBaseType.GBASE8A);
+				dataBaseTypes.add(DataBaseType.GBASE8T);
+				break;
 			case HIGHGODB:
-				return DataBaseType.HIGHGO;
+				dataBaseTypes.add(DataBaseType.HIGHGO);
+				break;
 			case KINGBASE:
-				return DataBaseType.KINGBASE8;
+				dataBaseTypes.add(DataBaseType.KINGBASE8);
+				dataBaseTypes.add(DataBaseType.KINGBASE);
+				break;
 			case RDS_MYSQL:
-				return DataBaseType.RDS_MYSQL;
+				dataBaseTypes.add(DataBaseType.RDS_MYSQL);
+				break;
 			case RDS_POSTGRESQL:
-				return DataBaseType.RDS_PGSQL;
+				dataBaseTypes.add(DataBaseType.RDS_PGSQL);
+				break;
 			default:
-				return DataBaseType.getDataBaseTypyByDriverTypeAndVersion(dbType.getDbTypeValue());
+				DataBaseType dataBaseType = DataBaseType.getDataBaseTypyByDriverTypeAndVersion(dbType.getDbTypeValue());
+				if (Objects.nonNull(dataBaseType)) {
+					dataBaseTypes.add(dataBaseType);
+				}
+				break;
 		}
 
+		return dataBaseTypes;
 	}
 }

@@ -30,24 +30,34 @@ public class DatabaseCliProcessor extends AbstractDsTestProcessor {
 	@Override
 	protected boolean validateUsernamePasswordAuth(DsUsernamePasswordAuth dsUsernamePasswordAuth) {
 		try {
-			DataBaseType dataBaseType = toDataBaseType(dsUsernamePasswordAuth);
+			List<DataBaseType> dataBaseTypes = toDataBaseType(dsUsernamePasswordAuth);
 
 			String dbName = dsUsernamePasswordAuth.getInstanceName();
 			if(StringUtils.isBlank(dbName)){
 				dbName = dsUsernamePasswordAuth.getServiceName();
 			}
 			Properties properties = new Properties();
-			if(dataBaseType == DataBaseType.INFORMIX){
-				if(StringUtils.isNotBlank(dsUsernamePasswordAuth.getServiceName())){
-					properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, dsUsernamePasswordAuth.getServiceName());
+
+			try {
+				for (DataBaseType dataBaseType : dataBaseTypes) {
+					if(dataBaseType == DataBaseType.INFORMIX){
+						if(StringUtils.isNotBlank(dsUsernamePasswordAuth.getServiceName())){
+							properties.setProperty(DatasourceConstant.KEY_DB_SERVER_NAME, dsUsernamePasswordAuth.getServiceName());
+						}
+					}else {
+						properties.remove(DatasourceConstant.KEY_DB_SERVER_NAME);
+					}
+					DatasourceDatabaseCli datasourceDatabase =
+							new DatasourceDatabaseCli(dataBaseType.pluginId,
+									dsUsernamePasswordAuth.getAddress(), dbName, String.valueOf(dsUsernamePasswordAuth.getPort()),
+									dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword(), true, properties);
+					datasourceDatabase.connect(true);
+					return true;
 				}
+			} catch (Exception e) {
+				logger.error("hive测试连接错误：" + ExceptionUtils.getFullStackTrace(e));
 			}
-			DatasourceDatabaseCli datasourceDatabase =
-					new DatasourceDatabaseCli(dataBaseType.pluginId,
-							dsUsernamePasswordAuth.getAddress(), dbName, String.valueOf(dsUsernamePasswordAuth.getPort()),
-							dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword(), true, properties);
-			datasourceDatabase.connect(true);
-			return true;
+			return false;
 		} catch (Exception e) {
 			logger.error("测试连接错误：" + ExceptionUtils.getFullStackTrace(e));
 			return false;

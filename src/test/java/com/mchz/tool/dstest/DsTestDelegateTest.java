@@ -30,7 +30,7 @@ public class DsTestDelegateTest {
 	public void testMysqlConnection() {
 		DsTestDelegate dsTestDelegate = new DsTestDelegate();
 		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
-		auth.setAddress("2001::192:168:230:156");
+		auth.setAddress("192.168.230.157");
 		auth.setPort(13306);
 		auth.setInstanceName("soc");
 		auth.setDbType(DBType.MYSQL.getDbTypeValue());
@@ -181,6 +181,24 @@ public class DsTestDelegateTest {
 
 		auth.setUserName("sa");
 		auth.setPassword("Hzmc321#");
+
+		Assert.assertTrue("测试sql server服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
+		Assert.assertTrue("测试sql server连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));
+	}
+
+	@Test
+	@Ignore
+	public void testSqlServerConnection1() {
+		DsTestDelegate dsTestDelegate = new DsTestDelegate();
+
+		DsUsernamePasswordAuth auth = new DsUsernamePasswordAuth();
+		auth.setAddress("192.168.202.119");
+		auth.setPort(1433);
+		auth.setInstanceName("master");
+		auth.setDbType(DBType.SQLSERVER.getDbTypeValue());
+
+		auth.setUserName("sa");
+		auth.setPassword("hzmc321#");
 
 		Assert.assertTrue("测试sql server服务失败", dsTestDelegate.testService(auth.getAddress(), auth.getPort()));
 		Assert.assertTrue("测试sql server连接失败", dsTestDelegate.testConnection(auth.getDbTypeDict(), auth));

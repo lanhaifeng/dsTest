@@ -22,7 +22,7 @@ public class MongoDBTestProcessorTest {
 	public void validateUsernamePasswordAuth() {
 		dsUsernamePasswordAuth.setAddress("192.168.202.2");
 		dsUsernamePasswordAuth.setPort(27017);
-		dsUsernamePasswordAuth.setUserName("test1");
+		dsUsernamePasswordAuth.setUserName("test");
 		dsUsernamePasswordAuth.setPassword("test");
 		dsUsernamePasswordAuth.setInstanceName("test");
 

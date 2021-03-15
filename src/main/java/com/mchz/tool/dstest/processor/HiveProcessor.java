@@ -35,10 +35,10 @@ public class HiveProcessor extends AbstractDsTestProcessor {
 	protected boolean validateUsernamePasswordAuth(DsUsernamePasswordAuth dsUsernamePasswordAuth) {
 		try {
 			Properties properties = new Properties();
-			DataBaseType dataBaseType = toDataBaseType(dsUsernamePasswordAuth);
+			List<DataBaseType> dataBaseTypes = toDataBaseType(dsUsernamePasswordAuth);
 			if (dsUsernamePasswordAuth instanceof DsKerberosAuth) {
 				DsKerberosAuth dsKerberosAuth = (DsKerberosAuth) dsUsernamePasswordAuth;
-				if(StringUtils.isNotBlank(dsKerberosAuth.getPrincipal())){
+				if (StringUtils.isNotBlank(dsKerberosAuth.getPrincipal())) {
 					properties.setProperty(DatasourceConstant.KEY_DB_HIVE_PRINCIPAL, dsKerberosAuth.getPrincipal());
 				}
 
@@ -46,16 +46,22 @@ public class HiveProcessor extends AbstractDsTestProcessor {
 				String krb5 = Base64.encode(new FileReader(dsKerberosAuth.getConfigFile()).readBytes());
 				properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_KEYTAB_CONTENT, keytab);
 				properties.setProperty(DatasourceConstant.KEY_DB_KRB5_CONTENT, krb5);
-				if(StringUtils.isNotBlank(dsUsernamePasswordAuth.getUserName())){
+				if (StringUtils.isNotBlank(dsUsernamePasswordAuth.getUserName())) {
 					properties.setProperty(DatasourceConstant.KEY_DB_LOGIN_PRINCIPAL, dsUsernamePasswordAuth.getUserName());
 				}
 			}
-			DatasourceDatabaseCli hive = new DatasourceDatabaseCli(dataBaseType.pluginId, dsUsernamePasswordAuth.getAddress(),
-					dsUsernamePasswordAuth.getInstanceName(), String.valueOf(dsUsernamePasswordAuth.getPort()),
-					dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword(), true, properties);
-			hive.connect(true);
-
-			return true;
+			try {
+				for (DataBaseType dataBaseType : dataBaseTypes) {
+					DatasourceDatabaseCli hive = new DatasourceDatabaseCli(dataBaseType.pluginId, dsUsernamePasswordAuth.getAddress(),
+							dsUsernamePasswordAuth.getInstanceName(), String.valueOf(dsUsernamePasswordAuth.getPort()),
+							dsUsernamePasswordAuth.getUserName(), dsUsernamePasswordAuth.getPassword(), true, properties);
+					hive.connect(true);
+					return true;
+				}
+			} catch (Exception e) {
+				logger.error("hive测试连接错误：" + ExceptionUtils.getFullStackTrace(e));
+			}
+			return false;
 		} catch (Exception e) {
 			logger.error("hive测试连接错误：" + ExceptionUtils.getFullStackTrace(e));
 
